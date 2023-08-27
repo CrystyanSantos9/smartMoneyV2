@@ -4,7 +4,7 @@ import BalanceLabel from '../../components/BalanceLabel';
 import {StyleSheet, Text, View} from 'react-native';
 import EntrySummary from '../../components/EntrySummary';
 import EntryList from '../../components/EntryList';
-import RNPickerSelect from 'react-native-picker-select';
+import {Picker} from '@react-native-picker/picker';
 
 type Props = {};
 
@@ -13,14 +13,16 @@ const Report: React.FC<Props> = (props: Props) => {
     <View style={styles.container}>
       <BalanceLabel />
       <View>
-        <RNPickerSelect
-          onValueChange={value => console.log(value)}
-          items={[{label: 'Todas Categorias', value: 'Todas Categorias'}]}
-        />
-        <RNPickerSelect
-          onValueChange={value => console.log(value)}
-          items={[{label: 'Últimos 7 dias', value: 'Últimos 7 dias'}]}
-        />
+        <Picker
+          selectedValue={'Todas Categorias'}
+          onValueChange={event => console.log(event)}>
+          <Picker.Item label="Todas Categorias" value="Todas Categorias" />
+        </Picker>
+        <Picker
+          selectedValue={'Últimos 7 dias'}
+          onValueChange={event => console.log(event)}>
+          <Picker.Item label="Últimos 7 dias" value="Últimos 7 dias" />
+        </Picker>
       </View>
       <EntrySummary />
       <EntryList />
