@@ -5,6 +5,7 @@ import BalancePanel from '../../components/BalancePanel';
 import EntrySummary from '../../components/EntrySummary';
 
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import EntryList from '../../components/EntryList';
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
@@ -12,6 +13,20 @@ type Props = {
 
 const Main: React.FC<Props> = ({navigation}) => {
   const currentBalance = '2.088,35';
+
+  const entries = [
+    {key: '1', description: 'Alimentação', amount: '$201'},
+    {key: '2', description: 'Saude', amount: '$300'},
+    {key: '3', description: 'Educação', amount: '$493'},
+    {key: '4', description: 'Lazer', amount: '$1200'},
+  ];
+
+  const entriesGrouped = [
+    {key: '1', description: 'Alimentação', amount: '$201'},
+    {key: '2', description: 'Saude', amount: '$300'},
+    {key: '3', description: 'Educação', amount: '$493'},
+    {key: '4', description: 'Lazer', amount: '$1200'},
+  ];
 
   return (
     <View style={styles.container}>
@@ -21,7 +36,8 @@ const Main: React.FC<Props> = ({navigation}) => {
         onPress={() => navigation.navigate('NewEntry')}
       />
       <BalancePanel currentBalance={currentBalance} />
-      <EntrySummary />
+      <EntrySummary entriesGrouped={entriesGrouped} />
+      <EntryList entries={entries} />
     </View>
   );
 };

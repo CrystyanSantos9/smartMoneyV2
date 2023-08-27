@@ -1,13 +1,16 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import React from 'react';
 import EntryListItem from './EntryListItem';
+import {Entry} from '../../types';
 
-type Props = {};
+type Props = {
+  entries: Entry[];
+};
 
-const EntryList: React.FC<Props> = (props: Props) => {
+const EntryList: React.FC<Props> = ({entries}) => {
   return (
     <View style={styles.container}>
-      <EntryListItem />
+      <EntryListItem entries={entries} />
     </View>
   );
 };

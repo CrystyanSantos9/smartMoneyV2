@@ -9,9 +9,11 @@ type Props = {
 };
 
 const NewEntry: React.FC<Props> = ({navigation}) => {
+  const currentBalance = '2.535,66';
+
   return (
     <View style={styles.container}>
-      <BalanceLabel />
+      <BalanceLabel currentBalance={currentBalance} />
       <View>
         <TextInput style={styles.input} />
         <TextInput style={styles.input} />

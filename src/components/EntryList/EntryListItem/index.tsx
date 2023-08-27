@@ -1,19 +1,22 @@
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import React from 'react';
+import {Entry} from '../../../types';
 
-type Props = {};
+type Props = {
+  entries: Entry[];
+};
 
-const EntryListItem: React.FC<Props> = (props: Props) => {
+const EntryListItem: React.FC<Props> = ({entries}) => {
   return (
     <View>
       <Text style={styles.title}> Últimos lançamentos </Text>
       <FlatList
-        data={[
-          {key: 'Alimentação: 1'},
-          {key: 'Alimentação: 2'},
-          {key: 'Alimentação: 3'},
-        ]}
-        renderItem={({item}) => <Text>{item.key}</Text>}
+        data={entries}
+        renderItem={({item}) => (
+          <Text>
+            - {item.description}: {item.amount}
+          </Text>
+        )}
       />
     </View>
   );
