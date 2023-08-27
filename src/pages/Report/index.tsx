@@ -1,14 +1,14 @@
 import React from 'react';
 
 import BalanceLabel from '../../components/BalanceLabel';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import EntrySummary from '../../components/EntrySummary';
 import EntryList from '../../components/EntryList';
 import {Picker} from '@react-native-picker/picker';
 
 type Props = {};
 
-const Report: React.FC<Props> = (props: Props) => {
+const Report: React.FC<Props> = () => {
   return (
     <View style={styles.container}>
       <BalanceLabel />
