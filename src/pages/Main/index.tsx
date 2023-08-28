@@ -7,6 +7,8 @@ import EntrySummary from '../../components/EntrySummary';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import EntryList from '../../components/EntryList';
 
+import {saveEntry} from '../../services/Entries';
+
 type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
@@ -28,12 +30,17 @@ const Main: React.FC<Props> = ({navigation}) => {
     {key: '4', description: 'Lazer', amount: '$1200'},
   ];
 
+  const save = async () => {
+    await saveEntry();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Main</Text>
       <Button
         title="Adicionar"
-        onPress={() => navigation.navigate('NewEntry')}
+        // onPress={() => navigation.navigate('NewEntry')}
+        onPress={save}
       />
       <BalancePanel currentBalance={currentBalance} />
       <EntrySummary entriesGrouped={entriesGrouped} />
