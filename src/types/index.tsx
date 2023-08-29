@@ -1,5 +1,5 @@
 export type Entry = {
-  key: String;
+  key: string;
   description: string;
-  amount: String;
+  amount: string;
 };

@@ -2,23 +2,36 @@ import {Alert} from 'react-native';
 
 import {getRealm} from '../db/realm';
 
-export const saveEntry = async () => {
+import {Entry} from '../types';
+import EntrySchema from '../db/schemas/EntrySchema';
+
+export const saveEntry = async (value: Entry) => {
   const realm = await getRealm();
+  const {amount} = value;
+
   let data = {};
   try {
     realm.write(() => {
       data = {
         id: 'ABC',
-        amount: 12.4,
+        amount: Number.parseFloat(amount),
         entryAt: new Date(),
         isInit: false,
       };
-      console.log(data);
-      realm.create('Entry', data, true);
+
+      realm.create(EntrySchema.name, data, true);
     });
     return data;
   } catch (error) {
     console.error('saveEntry :: error on save object: ', JSON.stringify(data));
     Alert.alert('Erro ao salvar os dados de lançamento');
   }
+};
+
+export const getEntries = async () => {
+  const realm = await getRealm();
+
+  const entries = realm.objects(EntrySchema.name) as unknown as Entry[];
+
+  return entries;
 };
