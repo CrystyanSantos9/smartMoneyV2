@@ -1,30 +1,52 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, FlatList, Text, Button} from 'react-native';
 import EntryListItem from './EntryListItem';
 import {Entry} from '../../types';
 import {getEntries} from '../../services/Entries';
 
-type Props = {
-  entries: Entry[];
-};
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
 
-const EntryList: React.FC<Props> = ({entries}) => {
+type Props = {};
+
+const EntryList: React.FC<Props> = () => {
   const [entriesFromDB, setEntriesFromDB] = useState<Entry[] | null>(null);
 
-  useEffect(() => {
-    async function loadEntries() {
-      const data = await getEntries();
-      console.log('getEntries :: entries ', JSON.stringify(data));
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
 
-      setEntriesFromDB(data);
+  async function loadEntries() {
+    const data = await getEntries();
+
+    console.log(JSON.stringify(data, null, 2));
+    setEntriesFromDB(data);
+  }
+
+  useEffect(() => {
+    if (isFocused) {
+      loadEntries();
     }
-    loadEntries();
-    console.log('EntryList :: useEffect');
-  }, []);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
-      <EntryListItem entries={entries} />
+      <Text style={styles.title}> Últimos lançamentos </Text>
+      <FlatList
+        data={entriesFromDB}
+        renderItem={({item}) => (
+          <Text>
+            - {item.description} : {item.amount}
+            <Button
+              title={item.id}
+              onPress={() => {
+                navigation.navigate('NewEntry', {
+                  entryParam: JSON.stringify(item),
+                });
+              }}
+            />
+          </Text>
+        )}
+      />
     </View>
   );
 };
@@ -32,6 +54,12 @@ const EntryList: React.FC<Props> = ({entries}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

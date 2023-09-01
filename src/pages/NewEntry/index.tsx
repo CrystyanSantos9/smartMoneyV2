@@ -1,43 +1,67 @@
-import React, {useState} from 'react';
-import {Button, StyleSheet, TextInput, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import BalanceLabel from '../../components/BalanceLabel';
 
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {saveEntry} from '../../services/Entries';
+import {saveEntry, deleteEntry} from '../../services/Entries';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {Entry, RouteParamPropEntry} from '../../types';
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
 
-const NewEntry: React.FC<Props> = ({navigation}) => {
+const NewEntry: React.FC<Props> = () => {
   const currentBalance = '2.535,66';
 
-  const [amount, setAmount] = useState('0');
+  const entryRouteParam: {entryParam: Entry} = {
+    entryParam: {
+      id: null,
+      amount: 0,
+      description: '',
+      entryAt: new Date(),
+    },
+  };
 
-  const save = () => {
-    console.log('NewEntry :: save ', amount);
-    const value = {
-      amount: amount,
-    };
+  const route = useRoute<RouteProp<{entryParam: {entryParam: Entry}}>>();
 
-    saveEntry(value);
+  const {entryParam} = (route?.params || '') as
+    | {entryParam: string}
+    | {entryParam: Entry};
+
+  const [entry, setEntry] = useState(
+    entryParam ? JSON.parse(entryParam) : entryRouteParam.entryParam,
+  );
+
+  const navigation = useNavigation();
+
+  const onSave = () => {
+    saveEntry(entry);
+    navigation.goBack();
+  };
+
+  const onRemove = () => {
+    deleteEntry(entry);
+    navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
+      {/* //   {entryRouteParam && <Text>{JSON.stringify(entry, null, 2)}</Text>} */}
       <BalanceLabel currentBalance={currentBalance} />
       <View>
         <TextInput
           style={styles.input}
-          onChangeText={text => setAmount(text)}
-          value={amount}
+          onChangeText={text => setEntry({...entry, amount: text})}
+          value={String(entry.amount)}
         />
         <TextInput style={styles.input} />
         <Button title="GPS" />
         <Button title="Camera" />
       </View>
       <View>
-        <Button title="Adicionar" onPress={save} />
+        <Button title="Adicionar" onPress={onSave} />
+        <Button title="Excluir" onPress={onRemove} />
 
         <Button title="Cancelar" onPress={() => navigation.goBack()} />
       </View>
