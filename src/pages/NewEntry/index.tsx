@@ -45,6 +45,13 @@ const NewEntry: React.FC<Props> = () => {
     navigation.goBack();
   };
 
+  const isValid = () => {
+    if (entry.amount !== '' && parseFloat(entry.amount) !== 0) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <View style={styles.container}>
       {/* //   {entryRouteParam && <Text>{JSON.stringify(entry, null, 2)}</Text>} */}
@@ -60,7 +67,7 @@ const NewEntry: React.FC<Props> = () => {
         <Button title="Camera" />
       </View>
       <View>
-        <Button title="Adicionar" onPress={onSave} />
+        <Button title="Adicionar" onPress={() => isValid() && onSave()} />
         <Button title="Excluir" onPress={onRemove} />
 
         <Button title="Cancelar" onPress={() => navigation.goBack()} />
