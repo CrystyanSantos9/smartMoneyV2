@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
+import Colors from '../../styles/Color';
 
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button, Dimensions} from 'react-native';
 import BalancePanel from '../../components/BalancePanel';
 import EntrySummary from '../../components/EntrySummary';
 
@@ -14,38 +15,27 @@ type Props = {
 };
 
 const Main: React.FC<Props> = ({navigation}) => {
-  const currentBalance = '2.088,35';
-
-  const entriesGrouped = [
-    {key: '1', description: 'Alimentação', amount: '$201'},
-    {key: '2', description: 'Saude', amount: '$300'},
-    {key: '3', description: 'Educação', amount: '$493'},
-    {key: '4', description: 'Lazer', amount: '$1200'},
-  ];
-
   const save = async () => {
     await saveEntry();
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Main</Text>
-      <Button
-        title="Adicionar"
-        onPress={() => navigation.navigate('NewEntry')}
-        //  onPress={save}
-      />
-      <BalancePanel currentBalance={currentBalance} />
-      <EntrySummary entriesGrouped={entriesGrouped} />
+      <BalancePanel onNewEntryPress={() => navigation.navigate('NewEntry')} />
+
+      <EntrySummary />
       <EntryList />
     </View>
   );
 };
 
+// const dimScreen = Dimensions.get('screen');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: Colors.background,
+    // width: dimScreen.width,
   },
   label: {
     fontSize: 20,

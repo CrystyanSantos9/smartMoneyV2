@@ -1,10 +1,16 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 
-const EntrySummaryList: React.FC<any> = ({entriesGrouped}) => {
+const EntrySummaryList: React.FC<any> = () => {
+  const entriesGrouped = [
+    {key: '1', description: 'Alimentação', amount: '$201'},
+    {key: '2', description: 'Saude', amount: '$300'},
+    {key: '3', description: 'Educação', amount: '$493'},
+    {key: '4', description: 'Lazer', amount: '$1200'},
+  ];
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Categorias</Text>
       <FlatList
         data={entriesGrouped}
         renderItem={({item}) => (
@@ -19,9 +25,7 @@ const EntrySummaryList: React.FC<any> = ({entriesGrouped}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   title: {
     fontSize: 22,
     fontWeight: 'bold',

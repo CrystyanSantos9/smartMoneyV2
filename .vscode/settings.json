@@ -1,3 +1,4 @@
 {
-    "editor.lineHeight": 11
+    "editor.lineHeight": 11,
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

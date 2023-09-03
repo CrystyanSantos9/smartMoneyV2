@@ -1,6 +1,7 @@
 import {NavigationContainerProps} from '@react-navigation/native';
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
   navigation?: NavigationContainerProps;

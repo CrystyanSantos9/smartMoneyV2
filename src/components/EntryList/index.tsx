@@ -6,6 +6,7 @@ import {getEntries} from '../../services/Entries';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation, useIsFocused} from '@react-navigation/native';
+import Container from '../Core/Container';
 
 type Props = {};
 
@@ -29,8 +30,11 @@ const EntryList: React.FC<Props> = () => {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}> Últimos lançamentos </Text>
+    <Container
+      title="Últimos lançamentos"
+      actionLabelText="Últimos 7 dias"
+      actionButtonText="Ver mais"
+      onPressActionButton={() => {}}>
       <FlatList
         data={entriesFromDB}
         renderItem={({item}) => (
@@ -47,7 +51,7 @@ const EntryList: React.FC<Props> = () => {
           </Text>
         )}
       />
-    </View>
+    </Container>
   );
 };
 
