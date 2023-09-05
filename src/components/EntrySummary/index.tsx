@@ -5,13 +5,17 @@ import EntrySummaryList from './EntrySummaryList';
 
 import Container from '../Core/Container';
 
-const EntrySummary: React.FC<any> = ({}) => {
+type Props = {
+  onPressActionButton: unknown;
+};
+
+const EntrySummary: React.FC<Props> = ({onPressActionButton}) => {
   return (
     <Container
       title="Categorias"
       actionLabelText="Últimos 7 dias"
       actionButtonText="Ver mais"
-      onPressActionButton={() => {}}>
+      onPressActionButton={onPressActionButton}>
       <EntrySummaryChart />
       <EntrySummaryList />
     </Container>

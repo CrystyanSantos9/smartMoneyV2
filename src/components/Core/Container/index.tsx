@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from '../../../styles/Color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Container: React.FC<any> = ({

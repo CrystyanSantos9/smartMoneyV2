@@ -5,15 +5,17 @@ import {Entry} from '../../types';
 import {getEntries} from '../../services/Entries';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useNavigation, useIsFocused} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import Container from '../Core/Container';
 
-type Props = {};
+type Props = {
+  onEntryPress: unknown;
+  onPressActionButton: unknown;
+};
 
-const EntryList: React.FC<Props> = () => {
-  const [entriesFromDB, setEntriesFromDB] = useState<Entry[] | null>(null);
+const EntryList: React.FC<Props> = ({onEntryPress, onPressActionButton}) => {
+  const [entriesFromDB, setEntriesFromDB] = useState<Entry[] | unknown[]>([]);
 
-  const navigation = useNavigation();
   const isFocused = useIsFocused();
 
   async function loadEntries() {
@@ -34,21 +36,16 @@ const EntryList: React.FC<Props> = () => {
       title="Últimos lançamentos"
       actionLabelText="Últimos 7 dias"
       actionButtonText="Ver mais"
-      onPressActionButton={() => {}}>
+      onPressActionButton={onPressActionButton}>
       <FlatList
         data={entriesFromDB}
-        renderItem={({item}) => (
-          <Text>
-            - {item.description} : {item.amount}
-            <Button
-              title={item.id}
-              onPress={() => {
-                navigation.navigate('NewEntry', {
-                  entryParam: JSON.stringify(item),
-                });
-              }}
-            />
-          </Text>
+        renderItem={({item, index}) => (
+          <EntryListItem
+            entry={item}
+            isFirstItem={index === 0}
+            isLastItem={index === entriesFromDB.length - 1}
+            onEntryPress={onEntryPress}
+          />
         )}
       />
     </Container>
