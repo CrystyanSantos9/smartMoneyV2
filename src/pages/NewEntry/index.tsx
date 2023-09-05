@@ -6,14 +6,12 @@ import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {saveEntry, deleteEntry} from '../../services/Entries';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {Entry, RouteParamPropEntry} from '../../types';
-
+import Colors from '../../styles/Color';
 type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
 
 const NewEntry: React.FC<Props> = () => {
-  const currentBalance = '2.535,66';
-
   const entryRouteParam: {entryParam: Entry} = {
     entryParam: {
       id: null,
@@ -55,7 +53,7 @@ const NewEntry: React.FC<Props> = () => {
   return (
     <View style={styles.container}>
       {/* //   {entryRouteParam && <Text>{JSON.stringify(entry, null, 2)}</Text>} */}
-      <BalanceLabel currentBalance={currentBalance} />
+      <BalanceLabel />
       <View>
         <TextInput
           style={styles.input}
@@ -80,6 +78,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: Colors.background,
   },
   input: {
     borderColor: '#000',
