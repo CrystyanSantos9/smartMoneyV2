@@ -9,6 +9,7 @@ import {Entry, RouteParamPropEntry} from '../../types';
 import Colors from '../../styles/Color';
 import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
+import NewEntryDatePicker from './NewEntryDatePicker';
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
@@ -72,7 +73,9 @@ const NewEntry: React.FC<Props> = () => {
           category={entry.category}
           onChangeCategory={setEntry}
         />
-        <TextInput style={styles.input} />
+
+        <NewEntryDatePicker />
+
         <Button title="GPS" />
         <Button title="Camera" />
       </View>
