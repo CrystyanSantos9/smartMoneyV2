@@ -7,16 +7,20 @@ import {saveEntry, deleteEntry} from '../../services/Entries';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {Entry, RouteParamPropEntry} from '../../types';
 import Colors from '../../styles/Color';
+import NewEntryInput from './NewEntryInput';
+import NewEntryCategoryPicker from './NewEntryCategoryPicker';
+
 type Props = {
   navigation: NativeStackNavigationProp<any>;
 };
 
 const NewEntry: React.FC<Props> = () => {
-  const entryRouteParam: {entryParam: Entry} = {
+  const InitialEntry: {entryParam: Entry} = {
     entryParam: {
       id: null,
       amount: 0,
       description: '',
+      category: {id: null, name: 'Selecione'},
       entryAt: new Date(),
     },
   };
@@ -28,8 +32,11 @@ const NewEntry: React.FC<Props> = () => {
     | {entryParam: Entry};
 
   const [entry, setEntry] = useState(
-    entryParam ? JSON.parse(entryParam) : entryRouteParam.entryParam,
+    entryParam ? JSON.parse(entryParam) : InitialEntry.entryParam,
   );
+
+  const [amount, setAmount] = useState(entry.amount);
+  const [debit, setDebit] = useState(entry.amount <= 0 ? -1 : 1);
 
   const navigation = useNavigation();
 
@@ -52,13 +59,18 @@ const NewEntry: React.FC<Props> = () => {
 
   return (
     <View style={styles.container}>
-      {/* //   {entryRouteParam && <Text>{JSON.stringify(entry, null, 2)}</Text>} */}
+      {/* {debit && <Text>{JSON.stringify(debit, null, 2)}</Text>} */}
       <BalanceLabel />
       <View>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setEntry({...entry, amount: text})}
-          value={String(entry.amount)}
+        <NewEntryInput
+          value={entry.amount}
+          onChangeValue={setEntry}
+          onChangeDebit={setDebit}
+        />
+        <NewEntryCategoryPicker
+          debit={debit}
+          category={entry.category}
+          onChangeCategory={setEntry}
         />
         <TextInput style={styles.input} />
         <Button title="GPS" />

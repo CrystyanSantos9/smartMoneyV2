@@ -1,4 +1,20 @@
 {
-    "editor.lineHeight": 11,
-    "java.configuration.updateBuildConfiguration": "automatic"
+	"editor.lineHeight": 11,
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"editor.fontSize": 12,
+	"editor.fontFamily": "'Fira Code'",
+	"window.zoomLevel": 0.2,
+	"editor.cursorBlinking": "smooth",
+	"breadcrumbs.enabled": false,
+	// "editor.cursorStyle": "block",
+	"editor.fontLigatures": true,
+	"editor.rulers": [{
+			"column": 80,
+			"color": "#eeeeee11"
+		},
+		{
+			"column": 140,
+			"color": "#99ffff10"
+		},
+	],
 }

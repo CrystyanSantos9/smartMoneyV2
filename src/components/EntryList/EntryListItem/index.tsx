@@ -7,7 +7,7 @@ import Colors from '../../../styles/Color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
-  entry: unknown | Entry;
+  entry: Entry;
   isFirstItem: boolean;
   isLastItem: boolean;
   onEntryPress: unknown;
@@ -26,7 +26,7 @@ const EntryListItem: React.FC<Props> = ({
 
   const showBulletLine = !(isFirstItem && isLastItem);
 
-  const bulletColor = Colors.white;
+  const bulletColor = entry.category.color || Colors.white;
 
   return (
     <TouchableOpacity
@@ -49,7 +49,7 @@ const EntryListItem: React.FC<Props> = ({
               cx="10"
               cy="25"
               r={8}
-              stroke={Colors.background}
+              stroke={entry.background}
               strokeWidth="1.5"
               fill={bulletColor}
             />
@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   bullet: {
-    backgroundColor: Colors.yellow,
+    // backgroundColor: Colors.yellow,
   },
   description: {
     flex: 1,
-    backgroundColor: Colors.blue,
+    // backgroundColor: Colors.blue,
     justifyContent: 'center',
   },
   descriptionText: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
 
   amount: {
-    backgroundColor: Colors.green,
+    //  backgroundColor: Colors.green,
     justifyContent: 'center',
   },
   amountText: {

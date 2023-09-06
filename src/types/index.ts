@@ -6,7 +6,17 @@ export type Entry = {
   description: string;
   amount: number;
   entryAt?: Date;
+  category: Category;
   isInit?: boolean;
+};
+
+export type Category = {
+  key?: string;
+  id?: string | null;
+  name: string;
+  color?: string;
+  isInit?: boolean;
+  order?: number;
 };
 
 export type RouteParamProps = {entryParam: {entryParam: Entry}};
