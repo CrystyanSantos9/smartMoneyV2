@@ -62,7 +62,7 @@ const NewEntry: React.FC<Props> = () => {
     <View style={styles.container}>
       {/* {debit && <Text>{JSON.stringify(debit, null, 2)}</Text>} */}
       <BalanceLabel />
-      <View>
+      <View style={styles.formContainer}>
         <NewEntryInput
           value={entry.amount}
           onChangeValue={setEntry}
@@ -74,7 +74,12 @@ const NewEntry: React.FC<Props> = () => {
           onChangeCategory={setEntry}
         />
 
-        <NewEntryDatePicker />
+        <View style={styles.formActionContainer}>
+          <NewEntryDatePicker
+            value={new Date(entry.entryAt)}
+            onChangeDate={setEntry}
+          />
+        </View>
 
         <Button title="GPS" />
         <Button title="Camera" />
@@ -95,9 +100,19 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Colors.background,
   },
+
   input: {
     borderColor: '#000',
     borderWidth: 1,
+  },
+  formContainer: {
+    flex: 1,
+    paddingVertical: 20,
+  },
+  formActionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 10,
   },
 });
 

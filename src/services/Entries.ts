@@ -19,6 +19,7 @@ export const saveEntry = async (value: Entry) => {
         entryAt: value.entryAt,
         isInit: false,
         category: value.category,
+        description: value.category.name,
       };
 
       realm.create(EntrySchema.name, data, true);
