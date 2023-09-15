@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import BalanceLabel from '../../components/BalanceLabel';
 
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -10,6 +10,7 @@ import Colors from '../../styles/Color';
 import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
+import NewEntryDeleteAction from './NewEntryDeleteAction';
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
@@ -79,6 +80,7 @@ const NewEntry: React.FC<Props> = () => {
             value={new Date(entry.entryAt)}
             onChangeDate={setEntry}
           />
+          <NewEntryDeleteAction entry={entry} onOkPress={onRemove} />
         </View>
 
         <Button title="GPS" />
@@ -86,7 +88,6 @@ const NewEntry: React.FC<Props> = () => {
       </View>
       <View>
         <Button title="Adicionar" onPress={() => isValid() && onSave()} />
-        <Button title="Excluir" onPress={onRemove} />
 
         <Button title="Cancelar" onPress={() => navigation.goBack()} />
       </View>
