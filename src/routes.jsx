@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="NewEntry" bNewEntryckBehavior="order">
+      <Stack.Navigator initialRouteName="Main" bNewEntryckBehavior="order">
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="NewEntry" component={NewEntry} />
         <Stack.Screen name="Report" component={Report} />
