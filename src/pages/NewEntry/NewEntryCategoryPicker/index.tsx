@@ -7,6 +7,12 @@ import {
   StyleSheet,
   FlatList,
 } from 'react-native';
+
+import ActionFooter, {
+  ActionPrimaryButton,
+  ActionSecondaryButton,
+} from '../../../components/Core/ActionFooter';
+
 import Colors from '../../../styles/Color';
 import {
   getDebitCategories,
@@ -82,11 +88,9 @@ const NewEntryCategoryPicker: React.FC<Props> = ({
                 </TouchableOpacity>
               )}
             />
-            <TouchableOpacity
-              onPress={() => setModalVisible(false)}
-              style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>Fechar</Text>
-            </TouchableOpacity>
+            <ActionFooter>
+              <ActionPrimaryButton title="Fechar" onPress={onClosePress} />
+            </ActionFooter>
           </View>
         </Modal>
         <Text style={styles.pickerButtonText}>{category.name}</Text>

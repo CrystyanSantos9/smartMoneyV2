@@ -11,6 +11,10 @@ import NewEntryInput from './NewEntryInput';
 import NewEntryCategoryPicker from './NewEntryCategoryPicker';
 import NewEntryDatePicker from './NewEntryDatePicker';
 import NewEntryDeleteAction from './NewEntryDeleteAction';
+import ActionFooter, {
+  ActionPrimaryButton,
+  ActionSecondaryButton,
+} from '../../components/Core/ActionFooter';
 
 type Props = {
   navigation: NativeStackNavigationProp<any>;
@@ -82,15 +86,19 @@ const NewEntry: React.FC<Props> = () => {
           />
           <NewEntryDeleteAction entry={entry} onOkPress={onRemove} />
         </View>
-
-        <Button title="GPS" />
-        <Button title="Camera" />
       </View>
-      <View>
-        <Button title="Adicionar" onPress={() => isValid() && onSave()} />
-
-        <Button title="Cancelar" onPress={() => navigation.goBack()} />
-      </View>
+      <ActionFooter>
+        <ActionPrimaryButton
+          title={entry?.id ? 'Salvar' : 'Adicionar'}
+          onPress={() => {
+            isValid() && onSave();
+          }}
+        />
+        <ActionSecondaryButton
+          title="Cancelar"
+          onPress={() => navigation.goBack()}
+        />
+      </ActionFooter>
     </View>
   );
 };
